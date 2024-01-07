@@ -1,0 +1,50 @@
+/* Card1.css */
+.flex {
+  display: flex;
+}
+.jusityBetween {
+  justify-content: space-between;
+}
+.infoHeader {
+  display: flex;
+  align-items: center;
+}
+
+.infoHeader .infoIcon {
+  margin-right: 10px;
+}
+
+.infoHeader .title {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.infoDetails {
+  margin-top: 10px;
+}
+
+.optionButton {
+  display: flex;
+  height: 44px;
+  width: 100%;
+  padding: 20px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border-radius: 4px;
+  border: 2px solid var(--Primary-colours-FWD-Orange, #e87722);
+  background-color: #fff;
+  color: Secondary colours/FWD Dark Green;
+  margin-left: 8px;
+}
+
+.optionButton.active {
+  border-radius: 4px;
+  border: 2px solid var(--Primary-colours-FWD-Orange, #e87722);
+  background: var(--supporting-colours-fwd-orange-light-20, #fae4d3);
+  color: #E87722;
+}
+
