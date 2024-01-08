@@ -59,11 +59,23 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
       )}
       {disabled !== "none" && disabled !== "yes" && (
         <div>
+          <div className={`${styles.titleTaxResidence} ${styles.mt16}`}>
+            Please specify your country of tax residence and tax identification
+            number.
+          </div>
           {taxResidences.map((residence, index) => (
             <div key={index}>
-              <div className={`${styles.flex} ${styles.alignItemCenter}  ${styles.jusityBetween}`}>
+              <div
+                className={`${styles.flex} ${styles.alignItemCenter}  ${styles.jusityBetween}`}
+              >
                 <h3>Tax Residence {index + 1}</h3>
-                <Image onClick={() => handleRemoveTaxResidence(index)} width={24} height={24} src="/delete.svg" alt="delete" />
+                <Image
+                  onClick={() => handleRemoveTaxResidence(index)}
+                  width={24}
+                  height={24}
+                  src="/delete.svg"
+                  alt="delete"
+                />
               </div>
               <select
                 className={styles.select__field}
@@ -85,15 +97,18 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
               />
 
               <br></br>
-              <input
-                type="checkbox"
-                id={`noTax${index}`}
-                checked={residence.noTax}
-                onChange={(e) => handleNoTaxChange(index, e.target.checked)}
-              />
-              <label htmlFor={`noTax${index}`}>
-                No tax identification number
-              </label>
+              <div className={`${styles.flex} ${styles.alignItemCenter}`} >
+                <input
+                  className={styles.checkbox}
+                  type="checkbox"
+                  id={`noTax${index}`}
+                  checked={residence.noTax}
+                  onChange={(e) => handleNoTaxChange(index, e.target.checked)}
+                />
+                <label className={styles.labelNoTax} htmlFor={`noTax${index}`}>
+                  No tax identification number
+                </label>
+              </div>
             </div>
           ))}
           {taxResidences.length < 5 && (
@@ -102,7 +117,7 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
               onClick={handleAddTaxResidence}
             >
               <span>
-                <Image width={16} height={16} src="/plus.svg" alt="tooltip" />
+                <Image width={24} height={24} src="/plus.svg" alt="plus" />
               </span>
               Add Tax Residence
             </button>

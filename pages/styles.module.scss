@@ -62,6 +62,15 @@
 .ml4 {
   margin-left: 4px;
 }
+.mt16 {
+  margin-top: 16px;
+}
+.titleTaxResidence {
+  color: #183028;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 450;
+}
 
 .addTaxResidenceCountryBtn {
   color: var(--Primary-color-FWD-Orange, #e87722);
@@ -111,4 +120,46 @@
 
 .select__field::-ms-expand {
   display: none;
+}
+
+// check box
+
+.checkbox {
+  /* ซ่อนเครื่องหมายถูกที่มากับ checkbox */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* กำหนดขนาดของ checkbox */
+  width: 18px;
+  height: 18px;
+  /* สร้างพื้นหลังสีส้ม */
+  background-color: #fff;
+  /* กำหนดรูปร่างของ checkbox */
+  border-radius: 4px;
+  border: 1px solid #e87722; /* เส้นขอบสีส้ม */
+  position: relative;
+  /* ปรับข้อความเมื่อ checkbox เป็น 'checked' */
+}
+
+.checkbox:checked {
+  background-color: #e87722;
+  /* สร้างเครื่องหมายถูกสีขาว */
+  &:after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+.labelNoTax {
+  color: var(--Secondary-color-FWD-Dark-Green, #183028);
+  /* Body/16 Book */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 450;
 }
