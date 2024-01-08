@@ -2,6 +2,9 @@
 .flex {
   display: flex;
 }
+.alignItemCenter {
+  align-items: center;
+}
 .jusityBetween {
   justify-content: space-between;
 }
@@ -46,5 +49,9 @@
   border: 2px solid var(--Primary-colours-FWD-Orange, #e87722);
   background: var(--supporting-colours-fwd-orange-light-20, #fae4d3);
   color: #E87722;
+}
+
+.mt16 {
+  margin-top: 16px;
 }
 

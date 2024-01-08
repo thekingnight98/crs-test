@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import styles from "./styles.module.scss";
 
 interface TaxResidence {
   country: string;
@@ -14,8 +15,8 @@ const TaxResidenceForm: React.FC = () => {
       setTaxResidences([
         ...taxResidences,
         {
-          country: '',
-          taxIdentifyNumber: '',
+          country: "",
+          taxIdentifyNumber: "",
           noTax: false,
         },
       ]);
@@ -48,9 +49,6 @@ const TaxResidenceForm: React.FC = () => {
 
   return (
     <div>
-      {taxResidences.length < 5 && (
-        <button onClick={handleAddTaxResidence}>Add Tax Residence</button>
-      )}
       {taxResidences.map((residence, index) => (
         <div key={index}>
           <h3>Tax Residence {index + 1}</h3>
@@ -67,9 +65,13 @@ const TaxResidenceForm: React.FC = () => {
             type="text"
             placeholder="Tax Identify Number"
             value={residence.taxIdentifyNumber}
-            onChange={(e) => handleTaxIdentifyNumberChange(index, e.target.value)}
+            onChange={(e) =>
+              handleTaxIdentifyNumberChange(index, e.target.value)
+            }
           />
-          <button onClick={() => handleRemoveTaxResidence(index)}>Remove</button>
+          <button onClick={() => handleRemoveTaxResidence(index)}>
+            Remove
+          </button>
           <br></br>
           <input
             type="checkbox"
@@ -80,6 +82,9 @@ const TaxResidenceForm: React.FC = () => {
           <label htmlFor={`noTax${index}`}>No tax identification number</label>
         </div>
       ))}
+      {taxResidences.length < 5 && (
+        <button className={styles.mt16} onClick={handleAddTaxResidence}>Add Tax Residence</button>
+      )}
     </div>
   );
 };

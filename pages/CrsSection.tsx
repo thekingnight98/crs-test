@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import ChooseOne from "./chooseOne";
 import TaxResidenceForm from "./TaxResidence";
+import Image from "next/image";
 
 interface InfoCardProps {
-  icon: React.ReactNode;
+  icon: string;
   title: string;
   details: string;
   showChooseOne: boolean;
@@ -29,17 +30,25 @@ const InfoCard: React.FC<InfoCardProps> = ({
   }, []);
 
   return (
-    <div>
+    <>
       <div className={styles.infoHeader}>
-        <span className={styles.infoIcon}>{icon}</span>
+        <span className={styles.infoIcon}>
+          <Image width={16} height={16} src={icon} alt="tooltip" />
+        </span>
         <h2 className={styles.title}>{title}</h2>
       </div>
-      <div className={`${styles.flex} ${isMobile ? styles.jusityBetween : ""}`}>
+      <div
+        className={`${styles.flex} ${styles.alignItemCenter} ${
+          isMobile ? styles.jusityBetween : ""
+        }`}
+      >
         <p className={styles.infoDetails}>{details}</p>
+        {showChooseOne ? (
+          <Image width={16} height={16} src="/tooltip.svg" alt="tooltip" />
+        ) : null}
         {showChooseOne && <ChooseOne />}
       </div>
-      <TaxResidenceForm/>
-    </div>
+    </>
   );
 };
 
@@ -47,17 +56,18 @@ const CrsSection: React.FC = () => {
   return (
     <>
       <InfoCard
-        icon="Icon1"
-        title="หัวข้อ 1"
-        details="รายละเอียดของหัวข้อ 1"
+        icon={require("@/public/language.svg")}
+        title="Declaration of tax residence"
+        details="Declaration of tax residence to comply with the Royal Decree Schedule information exchange to comply with International Agreement on Taxation (CRS Law)"
         showChooseOne={false}
       />
       <InfoCard
-        icon="Icon2"
-        title="หัวข้อ 2"
-        details="รายละเอียดของหัวข้อ 2"
+        icon={require("@/public/account.svg")}
+        title="Applicant for insurance"
+        details="Are you a tax resident only in Thailand?"
         showChooseOne={true}
       />
+      <TaxResidenceForm />
     </>
   );
 };
