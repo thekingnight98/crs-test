@@ -8,14 +8,12 @@ interface TaxResidence {
   noTax: boolean;
 }
 interface TaxResidenceFormProps {
-  disabled: boolean;
+  disabled: string;
 }
-
 
 const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
   const [taxResidences, setTaxResidences] = useState<TaxResidence[]>([]);
-  console.log("disabled ==>",disabled);
-  
+  console.log("disabled ==>", disabled);
 
   const handleAddTaxResidence = () => {
     if (taxResidences.length < 5) {
@@ -56,14 +54,19 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
 
   return (
     <div>
-      {disabled ? (
+      {disabled === "yes" && (
         <p>Tax Residence form is disabled because yes option is selected.</p>
-      ) : (
+      )}
+      {disabled !== "none" && disabled !== "yes" && (
         <div>
           {taxResidences.map((residence, index) => (
             <div key={index}>
-              <h3>Tax Residence {index + 1}</h3>
+              <div className={`${styles.flex} ${styles.alignItemCenter}  ${styles.jusityBetween}`}>
+                <h3>Tax Residence {index + 1}</h3>
+                <Image onClick={() => handleRemoveTaxResidence(index)} width={24} height={24} src="/delete.svg" alt="delete" />
+              </div>
               <select
+                className={styles.select__field}
                 value={residence.country}
                 onChange={(e) => handleCountryChange(index, e.target.value)}
               >
@@ -80,9 +83,7 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
                   handleTaxIdentifyNumberChange(index, e.target.value)
                 }
               />
-              <button onClick={() => handleRemoveTaxResidence(index)}>
-                Remove
-              </button>
+
               <br></br>
               <input
                 type="checkbox"
@@ -96,9 +97,12 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
             </div>
           ))}
           {taxResidences.length < 5 && (
-            <button className={`${styles.mt16} ${styles.addTaxResidenceCountryBtn}`} onClick={handleAddTaxResidence}>
+            <button
+              className={`${styles.mt16} ${styles.addTaxResidenceCountryBtn}`}
+              onClick={handleAddTaxResidence}
+            >
               <span>
-              <Image width={16} height={16} src="/plus.svg" alt="tooltip" />
+                <Image width={16} height={16} src="/plus.svg" alt="tooltip" />
               </span>
               Add Tax Residence
             </button>

@@ -39,7 +39,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
 
 const CrsSection: React.FC = () => {
   const [isTaxResidenceEnabled, setIsTaxResidenceEnabled] =
-    useState<boolean>(true);
+    useState<string>("none");
 
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
@@ -55,9 +55,12 @@ const CrsSection: React.FC = () => {
 
   const handleChooseOneOption = (option: "none" | "yes" | "no") => {
     if (option === "yes") {
-      setIsTaxResidenceEnabled(false);
-    } else {
-      setIsTaxResidenceEnabled(true);
+      setIsTaxResidenceEnabled("yes");
+    } else if (option === "no") {
+      setIsTaxResidenceEnabled("no");
+    }
+    else {
+      setIsTaxResidenceEnabled("none");
     }
   };
 
@@ -79,11 +82,8 @@ const CrsSection: React.FC = () => {
         <ChooseOne handleChooseOneOption={handleChooseOneOption} />
       </div>
       {isTaxResidenceEnabled && (
-        <TaxResidenceForm disabled={false} />
-      )}
-       {!isTaxResidenceEnabled && (
-        <TaxResidenceForm disabled={true} />
-      )}
+       <TaxResidenceForm disabled={isTaxResidenceEnabled} />
+     )}
     </>
   );
 };
