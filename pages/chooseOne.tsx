@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 
-const ChooseOne: React.FC = () => {
+interface ChooseOneProps {
+  handleChooseOneOption: (option: "none" | "yes" | "no") => void;
+}
+
+const ChooseOne: React.FC<ChooseOneProps> = ({ handleChooseOneOption }) => {
   const [selectedOption, setSelectedOption] = useState<"none" | "yes" | "no">("none");
 
   const handleOptionClick = (option: "yes" | "no") => {
     setSelectedOption(option);
+    handleChooseOneOption(option); // Call the handler function with the selected option
   };
-
   return (
     <div className={styles.flex}>
       <button
@@ -17,7 +21,7 @@ const ChooseOne: React.FC = () => {
         Yes
       </button>
       <button
-        className={`${styles.optionButton} ${selectedOption === "no" ? styles.active : ""}`}
+        className={`${styles.optionButton} ${styles.ml8} ${selectedOption === "no" ? styles.active : ""}`}
         onClick={() => handleOptionClick("no")}
       >
         No

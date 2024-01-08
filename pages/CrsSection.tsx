@@ -8,15 +8,39 @@ interface InfoCardProps {
   icon: string;
   title: string;
   details: string;
-  showChooseOne: boolean;
+  showTooltip: boolean;
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({
   icon,
   title,
   details,
-  showChooseOne,
+  showTooltip,
 }) => {
+  return (
+    <>
+      <div className={styles.infoHeader}>
+        <span className={styles.infoIcon}>
+          <Image width={16} height={16} src={icon} alt="tooltip" />
+        </span>
+        <h2 className={styles.title}>{title}</h2>
+      </div>
+      <div className={`${styles.flex} ${styles.alignItemEnd}`}>
+        <div className={styles.infoDetails}>{details}</div>
+        {showTooltip ? (
+          <span className={styles.ml4}>
+            <Image width={16} height={16} src="/tooltip.svg" alt="tooltip" />
+          </span>
+        ) : null}
+      </div>
+    </>
+  );
+};
+
+const CrsSection: React.FC = () => {
+  const [isTaxResidenceEnabled, setIsTaxResidenceEnabled] =
+    useState<boolean>(true);
+
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,45 +53,37 @@ const InfoCard: React.FC<InfoCardProps> = ({
     return () => window.removeEventListener("resize", handleResize); // ลบ event listener เมื่อ Component ถูก unmount
   }, []);
 
-  return (
-    <>
-      <div className={styles.infoHeader}>
-        <span className={styles.infoIcon}>
-          <Image width={16} height={16} src={icon} alt="tooltip" />
-        </span>
-        <h2 className={styles.title}>{title}</h2>
-      </div>
-      <div
-        className={`${styles.flex} ${styles.alignItemCenter} ${
-          isMobile ? styles.jusityBetween : ""
-        }`}
-      >
-        <p className={styles.infoDetails}>{details}</p>
-        {showChooseOne ? (
-          <Image width={16} height={16} src="/tooltip.svg" alt="tooltip" />
-        ) : null}
-        {showChooseOne && <ChooseOne />}
-      </div>
-    </>
-  );
-};
+  const handleChooseOneOption = (option: "none" | "yes" | "no") => {
+    if (option === "yes") {
+      setIsTaxResidenceEnabled(false);
+    } else {
+      setIsTaxResidenceEnabled(true);
+    }
+  };
 
-const CrsSection: React.FC = () => {
   return (
     <>
       <InfoCard
         icon={require("@/public/language.svg")}
         title="Declaration of tax residence"
         details="Declaration of tax residence to comply with the Royal Decree Schedule information exchange to comply with International Agreement on Taxation (CRS Law)"
-        showChooseOne={false}
+        showTooltip={false}
       />
       <InfoCard
         icon={require("@/public/account.svg")}
         title="Applicant for insurance"
         details="Are you a tax resident only in Thailand?"
-        showChooseOne={true}
+        showTooltip={true}
       />
-      <TaxResidenceForm />
+      <div className={styles.mt16}>
+        <ChooseOne handleChooseOneOption={handleChooseOneOption} />
+      </div>
+      {isTaxResidenceEnabled && (
+        <TaxResidenceForm disabled={false} />
+      )}
+       {!isTaxResidenceEnabled && (
+        <TaxResidenceForm disabled={true} />
+      )}
     </>
   );
 };
