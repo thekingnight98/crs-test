@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import Image from "next/image";
+import { log } from "console";
 
 interface TaxResidence {
   country: string;
   taxIdentifyNumber: string;
   noTax: boolean;
+  reason: string;
 }
+
 interface TaxResidenceFormProps {
   disabled: string;
 }
 
 const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
   const [taxResidences, setTaxResidences] = useState<TaxResidence[]>([]);
-  console.log("disabled ==>", disabled);
+  const [showReasonField, setShowReasonField] = useState(false);
 
   const handleAddTaxResidence = () => {
     if (taxResidences.length < 5) {
@@ -23,6 +26,7 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
           country: "",
           taxIdentifyNumber: "",
           noTax: false,
+          reason: "",
         },
       ]);
     }
@@ -49,6 +53,19 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
   const handleNoTaxChange = (index: number, checked: boolean) => {
     const updatedResidences = [...taxResidences];
     updatedResidences[index].noTax = checked;
+    updatedResidences[index].reason = "";
+    setTaxResidences(updatedResidences);
+
+    if (checked) {
+      setShowReasonField(true);
+    } else {
+      setShowReasonField(false);
+    }
+  };
+
+  const handleReasonChange = (index: number, value: string) => {
+    const updatedResidences = [...taxResidences];
+    updatedResidences[index].reason = value;
     setTaxResidences(updatedResidences);
   };
 
@@ -82,10 +99,8 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
                 value={residence.country}
                 onChange={(e) => handleCountryChange(index, e.target.value)}
               >
-                {/* Dropdown ประเทศในเลือก */}
                 <option value="country1">Country 1</option>
                 <option value="country2">Country 2</option>
-                {/* อื่น ๆ */}
               </select>
               <input
                 type="text"
@@ -97,7 +112,7 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
               />
 
               <br></br>
-              <div className={`${styles.flex} ${styles.alignItemCenter}`} >
+              <div className={`${styles.flex} ${styles.alignItemCenter}`}>
                 <input
                   className={styles.checkbox}
                   type="checkbox"
@@ -109,6 +124,100 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
                   No tax identification number
                 </label>
               </div>
+
+              {showReasonField && residence.noTax && (
+                <div className={styles.reasonField}>
+                  <label htmlFor={`reason${index}`}>
+                    Please provide reason:
+                  </label>
+                  <br />
+                  <input
+                    type="radio"
+                    id={`reason1${index}`}
+                    value="Applicant or authorized person residing in a country without issued tax residence number."
+                    checked={
+                      residence.reason ===
+                      "Applicant or authorized person residing in a country without issued tax residence number."
+                    }
+                    onChange={() =>
+                      handleReasonChange(
+                        index,
+                        "Applicant or authorized person residing in a country without issued tax residence number."
+                      )
+                    }
+                  />
+                  <label htmlFor={`reason1${index}`}>
+                    Applicant or authorized person residing in a country without
+                    issued tax residence number.
+                  </label>
+
+                  <br />
+
+                  <input
+                    type="radio"
+                    id={`reason2${index}`}
+                    value="Applicant or authorized person yet to receive the issued tax identification number."
+                    checked={
+                      residence.reason ===
+                      "Applicant or authorized person yet to receive the issued tax identification number."
+                    }
+                    onChange={() =>
+                      handleReasonChange(
+                        index,
+                        "Applicant or authorized person yet to receive the issued tax identification number."
+                      )
+                    }
+                  />
+                  <label htmlFor={`reason2${index}`}>
+                    Applicant or authorized person yet to receive the issued tax
+                    identification number.
+                  </label>
+
+                  <br />
+                  {residence.reason ===
+                    "Applicant or authorized person yet to receive the issued tax identification number." && (
+                    <>
+                      <div className={styles.spanTextReason2}>
+                        Explain the reason why you cannot request Tax
+                        identification number:
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Reason"
+                        value={residence.reason}
+                        onChange={(e) =>
+                          handleReasonChange(index, e.target.value)
+                        }
+                      />
+                    </>
+                  )}
+
+                  <br />
+
+                  <input
+                    type="radio"
+                    id={`reason3${index}`}
+                    value="No need to disclose taxpayer identification number."
+                    checked={
+                      residence.reason ===
+                      "No need to disclose taxpayer identification number."
+                    }
+                    onChange={() =>
+                      handleReasonChange(
+                        index,
+                        "No need to disclose taxpayer identification number."
+                      )
+                    }
+                  />
+                  <label htmlFor={`reason3${index}`}>
+                      No need to disclose taxpayer identification number.
+                      <div className={styles.spanTextReason2}>
+                        Not mandatory to provide or reveal identification
+                        numbers as per country&apos;s laws.
+                      </div>
+                    </label>
+                </div>
+              )}
             </div>
           ))}
           {taxResidences.length < 5 && (
