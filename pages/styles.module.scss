@@ -65,6 +65,9 @@
 .mt16 {
   margin-top: 16px;
 }
+.mt5 {
+  margin-top: 5px;
+}
 .titleTaxResidence {
   color: #183028;
   font-size: 16px;
@@ -82,12 +85,12 @@
   border: 2px solid var(--Primary-color-FWD-Orange, #e87722);
   height: 44px;
   width: 100%;
+  max-width: 257px;
   background-color: #fff;
   align-items: center;
-  padding: 10px 16px;
-  gap: 4px;
   justify-content: center;
   display: flex;
+  cursor: pointer;
 }
 // custom select field
 .select__field {
@@ -114,6 +117,9 @@
   font-size: 16px;
   font-style: normal;
   color: #183028;
+}
+.iconPointer {
+  cursor: pointer;
 }
 
 /* remove default caret for ie */
@@ -170,3 +176,59 @@
   font-weight: 450;
 }
 
+.specifyNoTinReason2 {
+  color: var(--Supporting-colours-FWD-Grey-Darkest, #636566);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 450;
+  max-width: 254px;
+}
+.TextFieldspecifyNoTinReason2 {
+  border-radius: 4px;
+  border: 1px solid var(--Supporting-Color-FWD-Grey, #dbdfe1);
+  background: var(--Supporting-Color-White, #fff);
+  width: 100%;
+  max-width: 536px;
+  height: 56px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+// custom radio
+
+/* เมื่อ radio button ถูกเลือก */
+.inputRadio:checked {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"%3E%3Ccircle cx="10" cy="10" r="2" fill="%23E87722" /%3E%3Cpath fill-rule="evenodd" clip-rule="evenodd" d="M10 20C15.5228 20 20 15.5228 20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20ZM9.99991 16C6.6862 16 3.99991 13.3137 3.99991 10C3.99991 6.68631 6.6862 4.00002 9.99991 4.00002C13.3136 4.00002 15.9999 6.68631 15.9999 10C15.9999 13.3137 13.3136 16 9.99991 16Z" fill="%23E87722" /%3E%3C/svg%3E');
+    background-size: cover;
+  }
+}
+
+.inputRadio:not(:checked) {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"%3E%3Ccircle cx="12" cy="12" r="9" stroke="%23E87722" stroke-width="2" /%3E%3C/svg%3E');
+    background-size: cover;
+  }
+}
