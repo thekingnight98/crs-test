@@ -81,9 +81,6 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
 
   return (
     <div>
-      {disabled === "yes" && (
-        <p>Tax Residence form is disabled because yes option is selected.</p>
-      )}
       {disabled !== "none" && disabled !== "yes" && (
         <div>
           <div className={`${styles.titleTaxResidence} ${styles.mt16}`}>
@@ -124,7 +121,7 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
               />
 
               <br></br>
-              <div className={`${styles.flex} ${styles.alignItemCenter}`}>
+              <div className={`${styles.flex} ${styles.alignItemCenter} ${styles.mt16}`}>
                 <input
                   className={styles.checkbox}
                   type="checkbox"
@@ -132,7 +129,7 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
                   checked={residence.noTax}
                   onChange={(e) => handleNoTaxChange(index, e.target.checked)}
                 />
-                <label className={styles.labelNoTax} htmlFor={`noTax${index}`}>
+                <label className={`${styles.labelNoTax} ${styles.ml8} `} htmlFor={`noTax${index}`}>
                   No tax identification number
                 </label>
               </div>
