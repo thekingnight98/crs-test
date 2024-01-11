@@ -105,10 +105,20 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
               <select
                 className={styles.select__field}
                 value={residence.country}
-                onChange={(e) => handleCountryChange(index, e.target.value)}
+                onChange={(e) => {
+                  handleCountryChange(index, e.target.value);
+                  if (e.target.value !== "") {
+                    handleTaxIdentifyNumberChange(
+                      index,
+                      residence.taxIdentifyNumber
+                    );
+                  }
+                }}
               >
-                <option value="country1">Country 1</option>
-                <option value="country2">Country 2</option>
+                <option value="">Tax residence country </option>
+                <option value="th">THAILAND</option>
+                <option value="usa">USA</option>
+                <option value="chi">CHINA</option>
               </select>
               <input
                 type="text"
@@ -118,18 +128,26 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
                 onChange={(e) =>
                   handleTaxIdentifyNumberChange(index, e.target.value)
                 }
+                disabled={residence.country !== "th"}
+                required
               />
 
               <br></br>
-              <div className={`${styles.flex} ${styles.alignItemCenter} ${styles.mt16}`}>
+              <div
+                className={`${styles.flex} ${styles.alignItemCenter} ${styles.mt16}`}
+              >
                 <input
                   className={styles.checkbox}
                   type="checkbox"
                   id={`noTax${index}`}
                   checked={residence.noTax}
                   onChange={(e) => handleNoTaxChange(index, e.target.checked)}
+                  required
                 />
-                <label className={`${styles.labelNoTax} ${styles.ml8} `} htmlFor={`noTax${index}`}>
+                <label
+                  className={`${styles.labelNoTax} ${styles.ml8} `}
+                  htmlFor={`noTax${index}`}
+                >
                   No tax identification number
                 </label>
               </div>
@@ -194,18 +212,21 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
                   {residence.reason ===
                     "Applicant or authorized person yet to receive the issued tax identification number." && (
                     <>
-                      <div className={`${styles.spanTextReason2} ${styles.specifyNoTinReason2}`}>
+                      <div
+                        className={`${styles.spanTextReason2} ${styles.specifyNoTinReason2}`}
+                      >
                         Explain the reason why you cannot request Tax
                         identification number:
                       </div>
                       <input
-                       className={styles.TextFieldspecifyNoTinReason2}
+                        className={styles.TextFieldspecifyNoTinReason2}
                         type="text"
                         placeholder="Reason"
                         value={residence.noTinReson2}
                         onChange={(e) =>
                           handleReason2TextChange(index, e.target.value)
                         }
+                        required
                       />
                     </>
                   )}
@@ -249,7 +270,13 @@ const TaxResidenceForm: React.FC<TaxResidenceFormProps> = ({ disabled }) => {
               onClick={handleAddTaxResidence}
             >
               <span>
-                <Image className={styles.mt5} width={24} height={24} src="/plus.svg" alt="plus" />
+                <Image
+                  className={styles.mt5}
+                  width={24}
+                  height={24}
+                  src="/plus.svg"
+                  alt="plus"
+                />
               </span>
               Add tax residence country
             </button>
