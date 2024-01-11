@@ -15,22 +15,22 @@
   display: flex;
   align-items: center;
 }
-
+ 
 .infoHeader .infoIcon {
   margin-right: 10px;
 }
-
+ 
 .infoHeader .title {
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
 }
-
+ 
 .infoDetails {
   margin-top: 10px;
 }
-
+ 
 .optionButton {
   display: flex;
   height: 44px;
@@ -44,15 +44,18 @@
   border: 2px solid var(--Primary-colours-FWD-Orange, #e87722);
   background-color: #fff;
   color: #183028;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
 }
-
+ 
 .optionButton.active {
   border-radius: 4px;
   border: 2px solid var(--Primary-colours-FWD-Orange, #e87722);
   background: var(--supporting-colours-fwd-orange-light-20, #fae4d3);
   color: #e87722;
 }
-
+ 
 .mt16 {
   margin-top: 16px;
 }
@@ -74,7 +77,7 @@
   font-style: normal;
   font-weight: 450;
 }
-
+ 
 .addTaxResidenceCountryBtn {
   color: var(--Primary-color-FWD-Orange, #e87722);
   font-size: 16px;
@@ -121,15 +124,15 @@
 .iconPointer {
   cursor: pointer;
 }
-
+ 
 /* remove default caret for ie */
-
+ 
 .select__field::-ms-expand {
   display: none;
 }
-
+ 
 // check box
-
+ 
 .checkbox {
   /* ซ่อนเครื่องหมายถูกที่มากับ checkbox */
   -webkit-appearance: none;
@@ -146,12 +149,12 @@
   position: relative;
   /* ปรับข้อความเมื่อ checkbox เป็น 'checked' */
 }
-
+ 
 .checkbox:checked {
   background-color: #e87722;
   /* สร้างเครื่องหมายถูกสีขาว */
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     left: 6px;
     top: 2px;
@@ -175,7 +178,7 @@
   font-style: normal;
   font-weight: 450;
 }
-
+ 
 .specifyNoTinReason2 {
   color: var(--Supporting-colours-FWD-Grey-Darkest, #636566);
   font-size: 14px;
@@ -207,9 +210,9 @@
     color: #8b8e8f;
   }
 }
-
+ 
 // custom radio
-
+ 
 /* เมื่อ radio button ถูกเลือก */
 .inputRadio:checked {
   appearance: none;
@@ -218,9 +221,9 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-
+ 
   &::before {
-    content: "";
+    content: '';
     display: block;
     width: 20px;
     height: 20px;
@@ -228,7 +231,7 @@
     background-size: cover;
   }
 }
-
+ 
 .inputRadio:not(:checked) {
   appearance: none;
   -webkit-appearance: none;
@@ -236,9 +239,9 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-
+ 
   &::before {
-    content: "";
+    content: '';
     display: block;
     width: 24px;
     height: 24px;
@@ -246,3 +249,24 @@
     background-size: cover;
   }
 }
+.gridLayoutWrapper {
+  display: grid;
+    -webkit-column-gap: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    grid-template-columns: 380px 196px;
+    padding-bottom: 1rem;
+    margin: 0;
+}
+.customFromWrapper {
+  grid-template-columns: 1fr !important;
+  width: 600px;
+  text-align: left;
+}
+ 
+.customFromWrapperMobile {
+  grid-template-columns: 1fr !important;
+  text-align: left;
+  width: 100%;
+}
+ 
